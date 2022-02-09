@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2</title>
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px 5px #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution:
+                '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>' +
+                "contributors",
+            maxZoom: 18,
+        });
+
+        var map = L.map("map", {
+            center: [1.6205936537375942, -75.60417745664404],
+            zoom: 13.5,
+            layers: [osm/*paises, hidrografia, cities*/],
+            scrollWheelZoom: true
+        });
+
+        var markerUDLA = L.marker([1.6205130412857978, -75.60428622429313], {
+            draggable: true,
+            title: 'Haz click Aqui'
+        }).addTo(map)
+            .bindPopup('Universidad de la Amazonia')
+            .openPopup();
+
+        var circleAlcaldia = L.circle([1.6152682402657514, -75.61388145775156], 500, {
+            color: '#F39C12',
+            fillColor: '#283747',
+            fillOpacity: 0.5
+        }).addTo(map);
+        circleAlcaldia.bindPopup("Alcaldia de Florencia");
+
+        var marketAlcaldia = L.marker([1.6152682402657514, -75.61388145775156], {
+            draggable: true,
+            title: "Haz Click Aqui"
+        }).addTo(map)
+            .bindPopup('Alcaldia de Florencia')
+            .openPopup();
+
+        var markerSantander = L.marker([1.6149783347183602, -75.61330229210421], {
+            draggable: true,
+            title: 'Haz click Aqui'
+        }).addTo(map)
+            .bindPopup('Plaza Santander')
+            .openPopup();
+
+
+        var limitessantander = L.polygon([
+            [1.6151832760730678, -75.61370118030881],
+            [1.6153991597228563, -75.61304190515462],
+            [1.6147032189198511, -75.6128230940685],
+            [1.614512900794657, -75.61349941948774]
+        ], {
+            color: '#E74C3C'
+        }).addTo(map)
+            .bindPopup('Limites Plaza Santander');
+
+
+        var a = new L.LatLng(1.620091367734307, -75.60493923223186);
+        var b = new L.LatLng(1.6201134537129005, -75.6051854729531);
+        var c = new L.LatLng(1.6198967032138383, -75.60543304371176);
+        var d = new L.LatLng(1.6192507875359476, -75.60500223321009);
+        var e = new L.LatLng(1.618602944915508, -75.60456221422078);
+        var f = new L.LatLng(1.6183777224344345, -75.60439383737781);
+        var g = new L.LatLng(1.618362574997392, -75.6044411162944);
+        var ruta = [a, b, c, d, e, f, g]
+
+        var polyline = L.polyline(
+            ruta, { color: '#2471A3' }
+        ).addTo(map)
+            .bindPopup('Avda. Juan Carlos I');
+
+        L.control.scale().addTo(map);
+    </script>
+</body>
+
+</html>
